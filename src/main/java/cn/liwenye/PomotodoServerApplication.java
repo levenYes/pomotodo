@@ -12,8 +12,6 @@ import org.springframework.context.annotation.PropertySources;
  */
 @SpringBootApplication
 @MapperScan("cn.liwenye.dao")
-@PropertySources({@PropertySource(value = "classpath:config/config.properties")
-})
 @ImportResource({"classpath:spring/schedule.xml"})
 public class PomotodoServerApplication{
     public static void main(String [] args){

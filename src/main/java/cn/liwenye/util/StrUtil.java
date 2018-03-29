@@ -16,7 +16,15 @@ public class StrUtil {
                 end = i;
             }
         }
-        bookName = book.substring(begin,end+1);
+        try {
+            bookName = book.substring(begin, end + 1).trim();
+        } catch (Exception e){
+            /*TODO
+             *
+             * 用日志记录下来
+             */
+
+        }
         return bookName;
     }
 }

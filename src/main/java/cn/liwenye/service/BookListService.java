@@ -22,7 +22,7 @@ public class BookListService {
     @Autowired
     PomosMapper pomosMapper;
 
-    public void showBookList(String pathname){
+    public void genBookList(String pathname){
         List<Booklist> booklist = pomosMapper.selectBooklist();
         String subTitle = "";
         List<String> mdContent = new ArrayList<String>(16);

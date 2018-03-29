@@ -50,7 +50,7 @@
 		<property name="cronExpression" value="0/55 * * * * ? *" />
 		<property name="group" value="pomotodo" />
 	</bean>
-		<!-- 
+		<!--
 	          附：cronExpression配置说明 
 	
 		字段   允许值   允许的特殊字符 

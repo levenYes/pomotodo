@@ -8,19 +8,19 @@ import cn.liwenye.service.HttpService;
 
 public class ApiHandler extends Thread{
 
-    private HttpService HttpService;
+    private HttpService httpService;
 
     private String url;
 
 
     public ApiHandler(HttpService HttpService, String url) {
-        this.HttpService = HttpService;
+        this.httpService = HttpService;
         this.url = url;
     }
 
     @Override
     public void run() {
-        String data = HttpService.sendGet(url);
-        HttpService.importData(data);
+        String data = httpService.sendGet(url);
+        httpService.importData(data);
     }
 }

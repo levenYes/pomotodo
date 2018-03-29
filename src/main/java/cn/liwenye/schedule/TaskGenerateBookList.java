@@ -29,6 +29,6 @@ public class TaskGenerateBookList extends QuartzJobBean {
     }
 
     public void generateBookList() throws Exception {
-        bookListService.showBookList("/root/bookList/bookList.md");
+        bookListService.genBookList("/root/bookList/bookList.md");
     }
 }
