@@ -258,7 +258,6 @@
   <select id="selectBooklist"  resultMap="BooklistResultMap">
     select a.* from
       (select description,max(local_ended_at) as local_ended_at,count(uuid) as total_pomos from pomotodo.pomos
-        where description like '%阅读%《%'
         group by description) as a
         order by a.local_ended_at DESC
   </select>

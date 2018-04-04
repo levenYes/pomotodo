@@ -2,6 +2,7 @@ package cn.liwenye.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -18,6 +19,14 @@ public class DateUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String getThreeDayBefore() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        calendar.add(Calendar.DATE, -3);
+        String threeDaysAgo = sdf.format(calendar.getTime());
+        return threeDaysAgo;
     }
 
     /**

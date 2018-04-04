@@ -92,7 +92,10 @@ public class TxtUtil {
 	public static void initMdContent(List<String> mdContent) {
 		mdContent.add("---");
 		mdContent.add("title: 阅读清单");
-		mdContent.add("date: 2018/01/08");
+
+		String date = DateUtil.getThreeDayBefore();
+		mdContent.add("date: "+date);
+
 		mdContent.add("categories: 定时任务生成");
 		mdContent.add("---");
 		mdContent.add(" ");

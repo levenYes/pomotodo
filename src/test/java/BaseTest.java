@@ -1,13 +1,16 @@
 import cn.liwenye.PomotodoServerApplication;
 import cn.liwenye.dao.PomosMapper;
 import cn.liwenye.service.*;
+import cn.liwenye.util.StrUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.lang.reflect.Proxy;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 /**
  * @author liwenye
@@ -30,6 +33,12 @@ public class BaseTest {
 
     @Autowired
     ImportNewRecordService importNewRecordService;
+
+    @Autowired
+    private MailService mailService;
+
+    //@Autowired
+    //private StringRedisTemplate stringRedisTemplate;
 
     @Test
     public void test1(){
@@ -72,6 +81,31 @@ public class BaseTest {
     @Test
     public void test7(){
         importNewRecordService.update();
+    }
+
+    @Test
+    public void test8() {
+        //stringRedisTemplate.opsForValue().set("hello,", "world");
+        Calendar calendar1 = Calendar.getInstance();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/MM/dd");
+        calendar1.add(Calendar.DATE, -3);
+        String three_days_ago = sdf1.format(calendar1.getTime());
+        System.out.println(three_days_ago);
+
+    }
+
+    @Test
+    public void test9() {
+        String to = "levenyes@icloud.com";
+        String title = "testing";
+        String content = "hello, Liwenye!";
+        mailService.sendSimpleMail(to, title, content);
+    }
+
+    @Test
+    public void test10() {
+        String bookName = StrUtil.getBookName("#技术 《Spring技术内幕》");
+        System.out.println(bookName);
     }
 
 }

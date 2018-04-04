@@ -15,7 +15,7 @@ import java.util.Date;
 @Service
 public class ImportNewRecordService {
     @Autowired
-    HttpService HttpService;
+    HttpService httpService;
 
     @Autowired
     PomosMapper pomosMapper;
@@ -39,8 +39,8 @@ public class ImportNewRecordService {
         }
         String lastDay = sf.format(dayOfLastRecord);
         url = baseUrl + lastDay;
-        String data = HttpService.sendGet(url);
-        HttpService.importData(data);
+        String data = httpService.sendGet(url);
+        httpService.importData(data);
         pomosMapper.deleteDuplicatedRecord();
     }
 }

@@ -17,7 +17,11 @@ public class StrUtil {
             }
         }
         try {
-            bookName = book.substring(begin, end + 1).trim();
+            if(end == 0){
+                bookName = "";
+            } else {
+                bookName = book.substring(begin, end + 1).trim();
+            }
         } catch (Exception e){
             /*TODO
              *

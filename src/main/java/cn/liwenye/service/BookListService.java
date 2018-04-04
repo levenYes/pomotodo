@@ -40,7 +40,12 @@ public class BookListService {
                 String titleRow = "## " + subTitle;
                 mdContent.add(titleRow);
             }
-            String contentRow = StrUtil.getBookName(book)
+            String bookName = StrUtil.getBookName(book);
+            //检查书名，如果为空，则跳过。这是将检查从数据库转到java程序
+            if(bookName.length()==0) {
+                continue;
+            }
+            String contentRow = bookName
                     + "       最近阅读: " + lastDate
                     + "       累计用时: " + totalHours + "h";
             mdContent.add(contentRow);
