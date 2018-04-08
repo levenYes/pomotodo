@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class HelloController {
     @Autowired
-    HttpService HttpService;
+    ImportHistoryService ImportHistoryService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/hello")
     public String hello() {
-        return "action/bindBankCard";
+        String url = "https://api.pomotodo.com/1/account";
+        ImportHistoryService.importHistory();
+        return "hello world!";
     }
-
 }

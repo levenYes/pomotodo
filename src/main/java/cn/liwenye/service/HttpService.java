@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -100,5 +101,43 @@ public class HttpService {
             //insert
             pomosMapper.insert(pomos);
         }
+    }
+
+    public void importDataByBatch(String data){
+        JSONArray array = JSONArray.fromObject(data);
+        JSONObject object;
+        Pomos pomos;
+        List<Pomos> pomosList = new ArrayList<Pomos>(16);
+        for (int i = 0; i < array.size(); i++) {
+            object = array.getJSONObject(i);
+            pomos = (Pomos) JSONObject.toBean(object, Pomos.class);
+            //created_at
+            String strCreatedAt = pomos.getCreated_at();
+            Date dateCreatedAt = DateUtil.convertDate(strCreatedAt);
+            pomos.setCreatedAt(dateCreatedAt);
+            //updated_at
+            String strUpdatedAt = pomos.getUpdated_at();
+            Date dateUpdatedAt = DateUtil.convertDate(strUpdatedAt);
+            pomos.setUpdatedAt(dateUpdatedAt);
+            //started_at
+            String strStartedAt = pomos.getStarted_at();
+            Date dateStartedAt = DateUtil.convertDate(strStartedAt);
+            pomos.setStartedAt(dateStartedAt);
+            //ended_at
+            String strEndedAt = pomos.getEnded_at();
+            Date dateEndedAt = DateUtil.convertDate(strEndedAt);
+            pomos.setEndedAt(dateEndedAt);
+            //local_started_at
+            String strLocalStartedAt = pomos.getLocal_started_at();
+            Date dateLocalStartedAt = DateUtil.convertDate(strLocalStartedAt);
+            pomos.setLocalStartedAt(dateLocalStartedAt);
+            //local_ended_at
+            String strLocalEndedAt = pomos.getLocal_ended_at();
+            Date dateLocalEndedAt = DateUtil.convertDate(strLocalEndedAt);
+            pomos.setLocalEndedAt(dateLocalEndedAt);
+            //insert
+            pomosList.add(pomos);
+        }
+        pomosMapper.insertByBatch(pomosList);
     }
 }

@@ -104,8 +104,8 @@ public class BaseTest {
 
     @Test
     public void test10() {
-        String bookName = StrUtil.getBookName("#技术 《Spring技术内幕》");
-        System.out.println(bookName);
+        String url = "https://api.pomotodo.com/1/account";
+        String result = HttpService.sendGet(url);
     }
 
 }

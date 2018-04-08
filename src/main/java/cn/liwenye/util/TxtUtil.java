@@ -28,10 +28,13 @@ public class TxtUtil {
 		List<String> strList = new ArrayList<String>();
 		try {
 			String str = "";
-			fis = new FileInputStream(sourceFile);// FileInputStream
+			// FileInputStream
+			fis = new FileInputStream(sourceFile);
 			// 从文件系统中的某个文件中获取字节
-			isr = new InputStreamReader(fis);// InputStreamReader 是字节流通向字符流的桥梁,
-			br = new BufferedReader(isr);// 从字符输入流中读取文件中的内容,封装了一个newInputStreamReader的对象
+			// InputStreamReader 是字节流通向字符流的桥梁,
+			isr = new InputStreamReader(fis);
+			// 从字符输入流中读取文件中的内容,封装了一个newInputStreamReader的对象
+			br = new BufferedReader(isr);
 			while ((str = br.readLine()) != null) {
 				strList.add(str);
 				LOGGER.info("读取文件" + sourceFile + ":" + str);
@@ -107,29 +110,4 @@ public class TxtUtil {
 		mdContent.add("<!-- more -->");
 	}
 
-
-	void initMdConentBackup(List<String> mdContent) {
-		String fileName = "/doc/bookList.md";
-		File file = new File(fileName);
-		BufferedReader reader = null;
-		try {
-			reader = new BufferedReader(new FileReader(file));
-			String tempString = null;
-			// 一次读入一行，直到读入null为文件结束
-			while ((tempString = reader.readLine()) != null) {
-				System.out.println(tempString);
-				mdContent.add(tempString);
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (IOException e1) {
-				}
-			}
-		}
-	}
 }

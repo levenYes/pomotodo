@@ -27,7 +27,7 @@ public class ImportHistoryService {
             String baseUrl = "https://api.pomotodo.com/1/pomos?offset=0&limit=100&abandoned=false&manual=false&started_later_than=";
             url = baseUrl + laterThanDate;
             String data = HttpService.sendGet(url);
-            HttpService.importData(data);
+            HttpService.importDataByBatch(data);
             LastRecord lastRecord = pomosMapper.selectLastRecord();
             Date dayOfLastRecord = lastRecord.getDateOfLastRecord();
             SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
@@ -38,5 +38,9 @@ public class ImportHistoryService {
             laterThanDate = lastDay;
         }
         pomosMapper.deleteDuplicatedRecord();
+    }
+
+    public void clearHistory(){
+        pomosMapper.deleteAll();
     }
 }

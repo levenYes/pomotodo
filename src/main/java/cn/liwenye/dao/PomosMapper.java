@@ -15,6 +15,8 @@ public interface PomosMapper {
 
     int insert(Pomos record);
 
+    void insertByBatch(@Param("records") List<Pomos> records);
+
     int insertSelective(Pomos record);
 
     List<Pomos> selectByExample(PomosExample example);
@@ -28,4 +30,6 @@ public interface PomosMapper {
     void deleteDuplicatedRecord();
 
     LastRecord selectLastRecord();
+
+    void deleteAll();
 }

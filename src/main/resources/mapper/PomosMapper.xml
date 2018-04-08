@@ -118,6 +118,19 @@
         (select null from pomos b where b.uuid = #{uuid,jdbcType=VARCHAR})
         -->
   </insert>
+  <!-- 批量插入 -->
+  <insert id="insertByBatch" parameterType="java.util.List">
+    insert into pomos (uuid, created_at, updated_at,
+    description, started_at, ended_at,
+    local_started_at, local_ended_at, length,
+    abandoned, manual) VALUES
+    <foreach collection="records" item="record"  separator=",">
+      (#{record.uuid,jdbcType=VARCHAR}, #{record.createdAt,jdbcType=TIMESTAMP}, #{record.updatedAt,jdbcType=TIMESTAMP},
+      #{record.description,jdbcType=VARCHAR}, #{record.startedAt,jdbcType=TIMESTAMP}, #{record.endedAt,jdbcType=TIMESTAMP},
+      #{record.localStartedAt,jdbcType=TIMESTAMP}, #{record.localEndedAt,jdbcType=TIMESTAMP}, #{record.length,jdbcType=INTEGER},
+      #{record.abandoned,jdbcType=BIT}, #{record.manual,jdbcType=BIT})
+    </foreach>
+  </insert>
   <insert id="insertSelective" parameterType="cn.liwenye.bean.Pomos">
     insert into pomos
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -266,6 +279,10 @@
     call delete_duplicated_record
     }
   </update>
+  <update id="deleteAll">
+    delete from pomos
+  </update>
+
   <select id="selectLastRecord"  resultMap="LastRecordResultMap">
     select max(local_ended_at) as date_of_last_record
     from pomos
