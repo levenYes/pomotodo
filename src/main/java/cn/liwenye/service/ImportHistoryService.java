@@ -3,6 +3,7 @@ package cn.liwenye.service;
 import cn.liwenye.bean.LastRecord;
 import cn.liwenye.dao.PomosMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -19,12 +20,14 @@ public class ImportHistoryService {
     @Autowired
     PomosMapper pomosMapper;
 
+    @Value("${basicUrl}")
+    private String baseUrl;
+
     public void importHistory(){
         String url;
         String laterThanDate = "2016/08/31";
         boolean ifContinue = true;
         while(ifContinue){
-            String baseUrl = "https://api.pomotodo.com/1/pomos?offset=0&limit=100&abandoned=false&manual=false&started_later_than=";
             url = baseUrl + laterThanDate;
             String data = HttpService.sendGet(url);
             HttpService.importDataByBatch(data);

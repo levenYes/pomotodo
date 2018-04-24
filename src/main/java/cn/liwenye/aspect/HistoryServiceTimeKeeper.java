@@ -1,6 +1,5 @@
 package cn.liwenye.aspect;
 
-
 import cn.liwenye.service.ImportHistoryService;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +31,5 @@ public class HistoryServiceTimeKeeper {
     public void setEndTime() {
         endTime=System.currentTimeMillis();
         System.out.println("当前程序耗时："+(endTime-startTime)+"ms");
-        importHistoryService.clearHistory();
     }
 }

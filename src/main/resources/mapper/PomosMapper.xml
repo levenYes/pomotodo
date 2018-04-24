@@ -19,6 +19,9 @@
     <result column="local_ended_at" jdbcType="TIMESTAMP" property="lastDay" />
     <result column="total_pomos" jdbcType="INTEGER" property="totalPomos"/>
   </resultMap>
+  <resultMap id="TechPomosResultMap" type="cn.liwenye.bean.TechPomos">
+    <result column="num_of_tech_pomos" jdbcType="INTEGER" property="numOfTechPomos" />
+  </resultMap>
   <resultMap id="LastRecordResultMap" type="cn.liwenye.bean.LastRecord">
     <result column="date_of_last_record" jdbcType="TIMESTAMP" property="dateOfLastRecord" />
   </resultMap>
@@ -286,5 +289,12 @@
   <select id="selectLastRecord"  resultMap="LastRecordResultMap">
     select max(local_ended_at) as date_of_last_record
     from pomos
+  </select>
+  
+  <select id="selectNumOfTechPomos" resultMap="TechPomosResultMap" >
+  	select  count(distinct uuid)+70 as num_of_tech_pomos 
+  	from pomos 
+	where local_ended_at > '20180302'
+	and description like '%技术%'
   </select>
 </mapper>

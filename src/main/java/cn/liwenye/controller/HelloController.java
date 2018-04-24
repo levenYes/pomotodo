@@ -18,7 +18,6 @@ public class HelloController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/hello")
     public String hello() {
-        String url = "https://api.pomotodo.com/1/account";
         ImportHistoryService.importHistory();
         return "hello world!";
     }
