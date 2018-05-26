@@ -1,6 +1,9 @@
 package cn.liwenye.schedule;
 
 import cn.liwenye.service.ImportNewRecordService;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TaskImportNewRecord extends QuartzJobBean {
-
+	private Log log = LogFactory.getLog(TaskImportNewRecord.class);
+	
     @Autowired
     ImportNewRecordService importNewRecordService;
 

@@ -101,12 +101,17 @@ public class HttpService {
             //insert
             pomosMapper.insert(pomos);
         }
+        pomosMapper.deleteDuplicatedRecord();
     }
 
     public void importDataByBatch(String data){
         JSONArray array = JSONArray.fromObject(data);
         JSONObject object;
         Pomos pomos;
+        
+        /**
+         * 处理日期字符串，符合YYYY-MM-DD格式
+         */
         List<Pomos> pomosList = new ArrayList<Pomos>(16);
         for (int i = 0; i < array.size(); i++) {
             object = array.getJSONObject(i);
@@ -139,5 +144,6 @@ public class HttpService {
             pomosList.add(pomos);
         }
         pomosMapper.insertByBatch(pomosList);
+        pomosMapper.deleteDuplicatedRecord();
     }
 }

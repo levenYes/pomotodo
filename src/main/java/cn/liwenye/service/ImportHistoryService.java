@@ -15,13 +15,13 @@ import java.util.Date;
 @Service
 public class ImportHistoryService {
     @Autowired
-    HttpService HttpService;
+    HttpService httpService;
 
     @Autowired
     PomosMapper pomosMapper;
 
-    @Value("${basicUrl}")
-    private String baseUrl;
+    @Value("${spring.parameter.baseUrl}")
+    String baseUrl;
 
     public void importHistory(){
         String url;
@@ -29,8 +29,8 @@ public class ImportHistoryService {
         boolean ifContinue = true;
         while(ifContinue){
             url = baseUrl + laterThanDate;
-            String data = HttpService.sendGet(url);
-            HttpService.importDataByBatch(data);
+            String data = httpService.sendGet(url);
+            httpService.importDataByBatch(data);
             LastRecord lastRecord = pomosMapper.selectLastRecord();
             Date dayOfLastRecord = lastRecord.getDateOfLastRecord();
             SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
@@ -40,7 +40,6 @@ public class ImportHistoryService {
             }
             laterThanDate = lastDay;
         }
-        pomosMapper.deleteDuplicatedRecord();
     }
 
     public void clearHistory(){

@@ -3,6 +3,7 @@ package cn.liwenye.service;
 import cn.liwenye.bean.LastRecord;
 import cn.liwenye.dao.PomosMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -19,10 +20,12 @@ public class ImportNewRecordService {
 
     @Autowired
     PomosMapper pomosMapper;
+    
+    @Value("${spring.parameter.baseUrl}")
+    String baseUrl;
 
     public void update(){
         String url;
-        String baseUrl = "https://api.pomotodo.com/1/pomos?offset=0&limit=100&abandoned=false&manual=false&started_later_than=";
         LastRecord lastRecord = pomosMapper.selectLastRecord();
         Date dayOfLastRecord;
         SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
@@ -41,6 +44,5 @@ public class ImportNewRecordService {
         url = baseUrl + lastDay;
         String data = httpService.sendGet(url);
         httpService.importData(data);
-        pomosMapper.deleteDuplicatedRecord();
     }
 }

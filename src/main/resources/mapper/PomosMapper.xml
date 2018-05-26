@@ -108,7 +108,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.liwenye.bean.Pomos">
-    insert into pomos (uuid, created_at, updated_at, 
+    insert ignore into pomos (uuid, created_at, updated_at, 
       description, started_at, ended_at, 
       local_started_at, local_ended_at, length, 
       abandoned, manual)
@@ -123,7 +123,7 @@
   </insert>
   <!-- 批量插入 -->
   <insert id="insertByBatch" parameterType="java.util.List">
-    insert into pomos (uuid, created_at, updated_at,
+    insert ignore into pomos (uuid, created_at, updated_at,
     description, started_at, ended_at,
     local_started_at, local_ended_at, length,
     abandoned, manual) VALUES

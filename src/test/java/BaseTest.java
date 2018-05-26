@@ -81,10 +81,9 @@ public class BaseTest {
 //        System.out.println("消耗时间为：" +costTime/1000 + "秒");
 //    }
 //
-//    @Test
-//    public void test7(){
-//        importNewRecordService.update();
-//    }
+    @Test
+    public void test7(){
+    }
 //
 //    @Test
 //    public void test8() {
@@ -97,27 +96,27 @@ public class BaseTest {
 //
 //    }
 
-    @Test
-    public void test9() {
-    	//获取“技术”标签的番茄数
-    	int numOfPomos = 0;
-    	TechPomos techPomos = pomosMapper.selectNumOfTechPomos();
-    	numOfPomos = techPomos.getNumOfTechPomos();
-    	
-    	//非整十的番茄数，返回
-    	if (numOfPomos % 10 > 0) return;
-    	
-		//跟缓存中的番茄数比较。若相同，返回
-    	CacheSingleton cacheSingleton = CacheSingleton.getCacheSingleton();
-    	if(CacheSingleton.getNumOfPomosSent() == numOfPomos) return;
-    	cacheSingleton.setNumOfPomosSent(numOfPomos);
-    	
-    	//发送邮件
-    	String to = "levenyes@icloud.com";
-        String title = "番茄数到达" + numOfPomos + "!";
-        String content = "番茄数到达" + numOfPomos + "!";
-        mailService.sendSimpleMail(to, title, content);
-    }
+//    @Test
+//    public void test9() {
+//    	//获取“技术”标签的番茄数
+//    	int numOfPomos = 0;
+//    	TechPomos techPomos = pomosMapper.selectNumOfTechPomos();
+//    	numOfPomos = techPomos.getNumOfTechPomos();
+//    	
+//    	//非整十的番茄数，返回
+//    	if (numOfPomos % 10 > 0) return;
+//    	
+//		//跟缓存中的番茄数比较。若相同，返回
+//    	CacheSingleton cacheSingleton = CacheSingleton.getCacheSingleton();
+//    	if(CacheSingleton.getNumOfPomosSent() == numOfPomos) return;
+//    	cacheSingleton.setNumOfPomosSent(numOfPomos);
+//    	
+//    	//发送邮件
+//    	String to = "levenyes@icloud.com";
+//        String title = "番茄数到达" + numOfPomos + "!";
+//        String content = "番茄数到达" + numOfPomos + "!";
+//        mailService.sendSimpleMail(to, title, content);
+//    }
 //
 //    @Test
 //    public void test10() {
