@@ -2,6 +2,11 @@ package cn.liwenye.bean;
 
 import java.util.Date;
 
+/**
+ * @author liwenye
+ *
+ * @date 20180610
+ */
 public class Pomos {
     private String uuid;
 

@@ -35,12 +35,17 @@ public class TaskPomotodoMail extends QuartzJobBean {
     	numOfPomos = techPomos.getNumOfTechPomos();
     	
     	//非整十的番茄数，返回
-    	if (numOfPomos % 5 > 0) return;
+    	if (numOfPomos % 5 > 0) {
+    		return;
+    	}
     	
 		//跟缓存中的番茄数比较。若相同，返回
     	CacheSingleton.getCacheSingleton();
-    	if(CacheSingleton.getNumOfPomosSent() == numOfPomos) return;
-        CacheSingleton.setNumOfPomosSent(numOfPomos);
+    	if(CacheSingleton.getNumOfPomosSent() == numOfPomos) { 
+    		return;
+    	} else {
+            CacheSingleton.setNumOfPomosSent(numOfPomos);
+    	}
     	
     	//发送邮件
     	String to = "levenyes@icloud.com";
@@ -48,4 +53,5 @@ public class TaskPomotodoMail extends QuartzJobBean {
         String content = "番茄数到达" + numOfPomos + "!";
         mailService.sendSimpleMail(to, title, content);
     }
+    
 }

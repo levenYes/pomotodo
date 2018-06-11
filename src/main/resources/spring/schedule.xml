@@ -52,7 +52,7 @@
 		<property name="group" value="pomotodo" />
 	</bean>
 	
-	<!--生成阅读记录-->
+	<!--发送提醒邮件-->
 	<bean id="taskPomotodoMailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean" scope="prototype">
 		<property name="jobDetail">
 			<bean class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
