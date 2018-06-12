@@ -32,6 +32,7 @@ public class TaskPomotodoMail extends QuartzJobBean {
     		return;
     	}
     	
+    	
     	CacheSingleton.getCacheSingleton();
     	if(CacheSingleton.getNumOfPomosSent() == numOfTechPomos) {
     		return;
@@ -48,4 +49,5 @@ public class TaskPomotodoMail extends QuartzJobBean {
         }
         mailService.sendSimpleMail(to, title, content.toString());
     }
+    
 }

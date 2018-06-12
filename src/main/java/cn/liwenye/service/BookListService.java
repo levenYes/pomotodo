@@ -23,14 +23,14 @@ public class BookListService {
     PomosMapper pomosMapper;
 
     public void genBookList(String pathname){
-        List<Booklist> booklist = pomosMapper.selectBooklist();
+        List<Booklist> bookList = pomosMapper.selectBooklist();
         String subTitle = "";
         List<String> mdContent = new ArrayList<String>(16);
         TxtUtil.initMdContent(mdContent);
-        for(int i = 0; i<booklist.size(); i++){
-            String book = booklist.get(i).getBook();
-            Date date =booklist.get(i).getLastDay();
-            int totalPomos = booklist.get(i).getTotalPomos();
+        for(int i = 0; i<bookList.size(); i++){
+            String book = bookList.get(i).getBook();
+            Date date =bookList.get(i).getLastDay();
+            int totalPomos = bookList.get(i).getTotalPomos();
             double totalHours = totalPomos * 0.5;
             String lastDate;
             lastDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
