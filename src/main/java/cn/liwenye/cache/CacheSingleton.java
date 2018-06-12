@@ -1,7 +1,6 @@
 package cn.liwenye.cache;
 
 public class CacheSingleton {
-	@SuppressWarnings("unused")
 	private static int numOfPomosSent = 0;
 	
 	private static class SingletonHolder {

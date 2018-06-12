@@ -21,31 +21,31 @@ public class TaskPomotodoMail extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext context)
             throws JobExecutionException {
-        try {
             sendEmail();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
-    public void sendEmail() throws Exception {
-    	//获取“技术”标签的番茄数
-    	int numOfPomos = 0;
+    public void sendEmail(){
     	TechPomos techPomos = pomosMapper.selectNumOfTechPomos();
-    	numOfPomos = techPomos.getNumOfTechPomos();
+    	int numOfTechPomos = techPomos.getNumOfTechPomos();
     	
-    	//非整十的番茄数，返回
-    	if (numOfPomos % 5 > 0) return;
+    	if (numOfTechPomos % 5 > 0) {
+    		return;
+    	}
     	
-		//跟缓存中的番茄数比较。若相同，返回
     	CacheSingleton.getCacheSingleton();
-    	if(CacheSingleton.getNumOfPomosSent() == numOfPomos) return;
-        CacheSingleton.setNumOfPomosSent(numOfPomos);
+    	if(CacheSingleton.getNumOfPomosSent() == numOfTechPomos) {
+    		return;
+    	} else {
+    		CacheSingleton.setNumOfPomosSent(numOfTechPomos);
+    	}
     	
-    	//发送邮件
     	String to = "levenyes@icloud.com";
-        String title = "番茄数到达" + numOfPomos + "!";
-        String content = "番茄数到达" + numOfPomos + "!";
-        mailService.sendSimpleMail(to, title, content);
+        String title = "番茄数到达" + numOfTechPomos + "!";
+        String statement = "番茄数到达" + numOfTechPomos + "!";
+        StringBuilder content = new StringBuilder();
+        for (int i=0; i < 10; i++) {
+        	content.append(statement).append("\n");
+        }
+        mailService.sendSimpleMail(to, title, content.toString());
     }
 }
