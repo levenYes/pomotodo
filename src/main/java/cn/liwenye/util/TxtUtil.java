@@ -55,20 +55,7 @@ public class TxtUtil {
 		}
 		return strList;
 	}
-	
-	public static void main (String args[]) {
-		File file = new File ("D:\\abc.txt");
-		List<String> strList = readTxt(file);
-		StringBuilder sb = new StringBuilder();
-		for(String str: strList) {
-			sb.append(str+",");
-		}
-		System.out.println(sb.toString());
-		List<String> strList2 = new ArrayList<String>();
-		strList2.add(sb.toString());
-		writeTxt(file,strList2);
-	}
-	
+
 	/**
 	 * 写txt方法
 	 * @param targetFile 要写的txt文件

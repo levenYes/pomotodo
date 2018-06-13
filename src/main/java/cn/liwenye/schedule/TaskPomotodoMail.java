@@ -45,8 +45,8 @@ public class TaskPomotodoMail extends QuartzJobBean {
     	}
     	
     	String to = "levenyes@icloud.com";
-        String title = "技术番茄数到达" + numOfTechPomos + "!";
-        String statement = "结束番茄数到达" + numOfTechPomos + "!";
+        String title = "技术番茄数进阶提醒！！！";
+        String statement = "技术番茄数到达" + numOfTechPomos + "!";
         StringBuilder content = new StringBuilder();
         for (int i=0; i < repeatTimes; i++) {
         	content.append(statement).append("\n");
@@ -71,7 +71,7 @@ public class TaskPomotodoMail extends QuartzJobBean {
 		}
 
 		String to = "levenyes@icloud.com";
-		String title = "阅读番茄数到达" + numOfReadPomos + "!";
+		String title = "阅读番茄数积累提醒！！!";
 		String statement = "阅读番茄数到达" + numOfReadPomos + "!";
 		StringBuilder content = new StringBuilder();
 		for (int i=0; i < repeatTimes; i++) {
