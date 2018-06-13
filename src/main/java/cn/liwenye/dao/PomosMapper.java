@@ -1,10 +1,6 @@
 package cn.liwenye.dao;
 
-import cn.liwenye.bean.Booklist;
-import cn.liwenye.bean.LastRecord;
-import cn.liwenye.bean.Pomos;
-import cn.liwenye.bean.PomosExample;
-import cn.liwenye.bean.TechPomos;
+import cn.liwenye.bean.*;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -35,4 +31,6 @@ public interface PomosMapper {
     void deleteAll();
 
 	TechPomos selectNumOfTechPomos();
+
+    ReadPomos selectNumOfReadPomos();
 }

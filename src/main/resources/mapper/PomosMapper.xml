@@ -22,6 +22,9 @@
   <resultMap id="TechPomosResultMap" type="cn.liwenye.bean.TechPomos">
     <result column="num_of_tech_pomos" jdbcType="INTEGER" property="numOfTechPomos" />
   </resultMap>
+  <resultMap id="ReadPomosResultMap" type="cn.liwenye.bean.ReadPomos">
+    <result column="num_of_read_pomos" jdbcType="INTEGER" property="numOfReadPomos" />
+  </resultMap>
   <resultMap id="LastRecordResultMap" type="cn.liwenye.bean.LastRecord">
     <result column="date_of_last_record" jdbcType="TIMESTAMP" property="dateOfLastRecord" />
   </resultMap>
@@ -296,5 +299,11 @@
   	from pomos 
 	where local_ended_at > '20180302'
 	and description like '%技术%'
+  </select>
+
+  <select id="selectNumOfReadPomos" resultMap="ReadPomosResultMap" >
+    select  count(distinct uuid)-70 as num_of_read_pomos
+    from pomos
+    where description like '%阅读%'
   </select>
 </mapper>

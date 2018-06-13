@@ -1,7 +1,9 @@
 package cn.liwenye.cache;
 
 public class CacheSingleton {
-	private static int numOfPomosSent = 0;
+	private static int numOfTechPomosSent = 0;
+
+	private static int numOfReadPomosSent = 0;
 	
 	private static class SingletonHolder {
 		public static final CacheSingleton cacheSingleton = new CacheSingleton();
@@ -14,11 +16,19 @@ public class CacheSingleton {
 		return SingletonHolder.cacheSingleton;
 	}
 
-	public static int getNumOfPomosSent() {
-		return numOfPomosSent;
+	public static int getNumOfTechPomosSent() {
+		return numOfTechPomosSent;
 	}
 
-	public static void setNumOfPomosSent(int numOfPomosSent) {
-		CacheSingleton.numOfPomosSent = numOfPomosSent;
+	public static void setNumOfTechPomosSent(int numOfTechPomosSent) {
+		CacheSingleton.numOfTechPomosSent = numOfTechPomosSent;
+	}
+
+	public static int getNumOfReadPomosSent() {
+		return numOfReadPomosSent;
+	}
+
+	public static void setNumOfReadPomosSent(int numOfReadPomosSent) {
+		CacheSingleton.numOfReadPomosSent = numOfReadPomosSent;
 	}
 }
