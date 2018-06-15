@@ -3,10 +3,13 @@ package cn.liwenye.service;
 import cn.liwenye.bean.Pomos;
 import cn.liwenye.dao.PomosMapper;
 import cn.liwenye.util.DateUtil;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -68,12 +71,8 @@ public class HttpService {
     }
 
     public void importData(String data){
-        JSONArray array = JSONArray.fromObject(data);
-        JSONObject object;
-        Pomos pomos;
-        for (int i = 0; i < array.size(); i++) {
-            object = array.getJSONObject(i);
-            pomos = (Pomos) JSONObject.toBean(object, Pomos.class);
+    	List<Pomos> pomosList = JSONArray.parseArray(data, Pomos.class);
+        for (Pomos pomos : pomosList) {
             //created_at
             String strCreatedAt = pomos.getCreated_at();
             Date dateCreatedAt = DateUtil.convertDate(strCreatedAt);
@@ -105,17 +104,8 @@ public class HttpService {
     }
 
     public void importDataByBatch(String data){
-        JSONArray array = JSONArray.fromObject(data);
-        JSONObject object;
-        Pomos pomos;
-        
-        /**
-         * 处理日期字符串，符合YYYY-MM-DD格式
-         */
-        List<Pomos> pomosList = new ArrayList<Pomos>(16);
-        for (int i = 0; i < array.size(); i++) {
-            object = array.getJSONObject(i);
-            pomos = (Pomos) JSONObject.toBean(object, Pomos.class);
+    	List<Pomos> pomosList = JSONArray.parseArray(data, Pomos.class);
+    	 for (Pomos pomos : pomosList) {
             //created_at
             String strCreatedAt = pomos.getCreated_at();
             Date dateCreatedAt = DateUtil.convertDate(strCreatedAt);
@@ -140,8 +130,6 @@ public class HttpService {
             String strLocalEndedAt = pomos.getLocal_ended_at();
             Date dateLocalEndedAt = DateUtil.convertDate(strLocalEndedAt);
             pomos.setLocalEndedAt(dateLocalEndedAt);
-            //insert
-            pomosList.add(pomos);
         }
         pomosMapper.insertByBatch(pomosList);
         pomosMapper.deleteDuplicatedRecord();

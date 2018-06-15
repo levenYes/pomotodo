@@ -23,6 +23,8 @@ public class ImportNewRecordService {
     
     @Value("${spring.parameter.baseUrl}")
     String baseUrl;
+    
+    private static final String INIT_DATE = "2016/08/31";
 
     public void update(){
         String url;
@@ -34,7 +36,7 @@ public class ImportNewRecordService {
             dayOfLastRecord = lastRecord.getDateOfLastRecord();
         } else {
             try {
-                dayOfLastRecord = sf.parse("2016/08/31");
+                dayOfLastRecord = sf.parse(INIT_DATE);
             } catch (ParseException e) {
                 dayOfLastRecord = new Date();
                 e.printStackTrace();

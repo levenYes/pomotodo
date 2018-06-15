@@ -4,8 +4,10 @@ import cn.liwenye.bean.Booklist;
 import cn.liwenye.dao.PomosMapper;
 import cn.liwenye.util.StrUtil;
 import cn.liwenye.util.TxtUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -21,28 +23,28 @@ public class BookListService {
 
     @Autowired
     PomosMapper pomosMapper;
+    
+    private static final double HOUR_PER_POMOTODO = 0.4;
 
     public void genBookList(String pathname){
         List<Booklist> bookList = pomosMapper.selectBooklist();
         String subTitle = "";
         List<String> mdContent = new ArrayList<String>(16);
         TxtUtil.initMdContent(mdContent);
-        for(int i = 0; i<bookList.size(); i++){
-            String book = bookList.get(i).getBook();
-            Date date =bookList.get(i).getLastDay();
-            int totalPomos = bookList.get(i).getTotalPomos();
-            double totalHours = totalPomos * 0.5;
-            String lastDate;
-            lastDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        for(Booklist bookRecord : bookList){
+            String book = bookRecord.getBook();
+            Date date = bookRecord.getLastDay();
+            int totalPomos = bookRecord.getTotalPomos();
+            double totalHours = totalPomos * HOUR_PER_POMOTODO;
+            String lastDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
             String yearAndMonth = lastDate.substring(0,7);
-            if(!subTitle.equals(yearAndMonth)){
+            if(!subTitle.equals(yearAndMonth) && yearAndMonth != null){
                 subTitle = yearAndMonth;
                 String titleRow = "## " + subTitle;
                 mdContent.add(titleRow);
             }
             String bookName = StrUtil.getBookName(book);
-            //检查书名，如果为空，则跳过。这是将检查从数据库转到java程序
-            if(bookName.length()==0) {
+            if(StringUtils.isEmpty(bookName)) {
                 continue;
             }
             String contentRow = bookName
@@ -50,7 +52,6 @@ public class BookListService {
                     + "       累计用时: " + totalHours + "h";
             mdContent.add(contentRow);
         }
-        //打开预设文件
         File mdFile = new File(pathname);
         TxtUtil.writeTxt(mdFile,mdContent);
     }
