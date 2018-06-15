@@ -13,8 +13,8 @@ public class ApiHandler extends Thread{
     private String url;
 
 
-    public ApiHandler(HttpService HttpService, String url) {
-        this.httpService = HttpService;
+    public ApiHandler(HttpService httpService, String url) {
+        this.httpService = httpService;
         this.url = url;
     }
 

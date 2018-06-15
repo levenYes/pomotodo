@@ -1,6 +1,7 @@
 package cn.liwenye.schedule;
 
 import cn.liwenye.bean.ReadPomos;
+
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +11,15 @@ import cn.liwenye.bean.TechPomos;
 import cn.liwenye.cache.CacheSingleton;
 import cn.liwenye.dao.PomosMapper;
 import cn.liwenye.service.MailService;
+import cn.liwenye.service.SendMailService;
 
 public class TaskPomotodoMail extends QuartzJobBean {
 
 	@Autowired
-    private MailService mailService;
-
-	@Autowired
 	private PomosMapper pomosMapper;
 
-	private static int repeatTimes = 10;
+	@Autowired
+	private SendMailService sendMailService;
 
     @Override
     protected void executeInternal(JobExecutionContext context)
@@ -44,14 +44,9 @@ public class TaskPomotodoMail extends QuartzJobBean {
     		CacheSingleton.setNumOfTechPomosSent(numOfTechPomos);
     	}
     	
-    	String to = "levenyes@icloud.com";
-        String title = "技术番茄数进阶提醒！！！";
-        String statement = "技术番茄数到达" + numOfTechPomos + "!";
-        StringBuilder content = new StringBuilder();
-        for (int i=0; i < repeatTimes; i++) {
-        	content.append(statement).append("\n");
-        }
-        mailService.sendSimpleMail(to, title, content.toString());
+    	String pomotodoName = "技术";
+		int numOfPomotodo = numOfTechPomos;
+		sendMailService.sendEmail(pomotodoName, numOfPomotodo);
     }
 
 	public void sendReadEmail(){
@@ -70,14 +65,9 @@ public class TaskPomotodoMail extends QuartzJobBean {
 			CacheSingleton.setNumOfReadPomosSent(numOfReadPomos);
 		}
 
-		String to = "levenyes@icloud.com";
-		String title = "阅读番茄数积累提醒！！!";
-		String statement = "阅读番茄数到达" + numOfReadPomos + "!";
-		StringBuilder content = new StringBuilder();
-		for (int i=0; i < repeatTimes; i++) {
-			content.append(statement).append("\n");
-		}
-		mailService.sendSimpleMail(to, title, content.toString());
+		String pomotodoName = "阅读";
+		int numOfPomotodo = numOfReadPomos;
+		sendMailService.sendEmail(pomotodoName, numOfPomotodo);
 	}
-    
+
 }

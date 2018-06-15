@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class HelloController {
     @Autowired
-    ImportHistoryService ImportHistoryService;
+    ImportHistoryService importHistoryService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/hello")
     public String hello() {
-        ImportHistoryService.importHistory();
+        importHistoryService.importHistory();
         return "hello world!";
     }
 }

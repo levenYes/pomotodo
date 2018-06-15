@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TaskImportNewRecord extends QuartzJobBean {
-	private Log log = LogFactory.getLog(TaskImportNewRecord.class);
+	private Log logger = LogFactory.getLog(TaskImportNewRecord.class);
 	
     @Autowired
     ImportNewRecordService importNewRecordService;
@@ -28,7 +28,7 @@ public class TaskImportNewRecord extends QuartzJobBean {
         try {
             insert();
         } catch (Exception e) {
-            e.printStackTrace();
+        	logger.error("执行插入新数据定时任务方法发生异常", e);
         }
     }
 

@@ -6,14 +6,14 @@ public class CacheSingleton {
 	private static int numOfReadPomosSent = 0;
 	
 	private static class SingletonHolder {
-		public static final CacheSingleton cacheSingleton = new CacheSingleton();
+		public static final CacheSingleton CACHE_SINGLETON = new CacheSingleton();
 	}
 	
 	private CacheSingleton() {
 	}
 	
 	public static CacheSingleton getCacheSingleton() {
-		return SingletonHolder.cacheSingleton;
+		return SingletonHolder.CACHE_SINGLETON;
 	}
 
 	public static int getNumOfTechPomosSent() {

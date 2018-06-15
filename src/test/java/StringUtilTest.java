@@ -19,5 +19,12 @@ public class StringUtilTest {
     	String bookName = StrUtil.getBookName(bookString);
     	assertEquals( "《海底两万里》",(bookName));  
     }
+    
+    @Test
+    public void getBookNameTest2() {
+    	String bookString = "#阅读 Python编程快速上手》";
+    	String bookName = StrUtil.getBookName(bookString);
+    	assertEquals( "",(bookName));  
+    }
 
 }
