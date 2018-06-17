@@ -24,7 +24,7 @@ public class BookListService {
     @Autowired
     PomosMapper pomosMapper;
     
-    private static final double HOUR_PER_POMOTODO = 0.4;
+    private static final double HOUR_PER_POMOTODO = 0.5;
 
     public void genBookList(String pathname){
         List<Booklist> bookList = pomosMapper.selectBooklist();

@@ -1,6 +1,8 @@
 package cn.liwenye.schedule;
 
 import cn.liwenye.service.BookListService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +16,21 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class TaskGenerateBookList extends QuartzJobBean {
+    private Log logger = LogFactory.getLog(TaskGenerateBookList.class);
 
     @Autowired
     BookListService bookListService;
 
     @Override
-    protected void executeInternal(JobExecutionContext context)
-            throws JobExecutionException {
+    protected void executeInternal(JobExecutionContext context) {
         try {
             generateBookList();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("生成阅读记录文件发生异常", e);
         }
     }
 
-    public void generateBookList() throws Exception {
+    public void generateBookList() {
         bookListService.genBookList("/root/bookList/bookList.md");
     }
 }

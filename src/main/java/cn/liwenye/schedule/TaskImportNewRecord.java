@@ -23,8 +23,7 @@ public class TaskImportNewRecord extends QuartzJobBean {
     ImportNewRecordService importNewRecordService;
 
     @Override
-    protected void executeInternal(JobExecutionContext context)
-            throws JobExecutionException {
+    protected void executeInternal(JobExecutionContext context) {
         try {
             insert();
         } catch (Exception e) {
@@ -32,7 +31,7 @@ public class TaskImportNewRecord extends QuartzJobBean {
         }
     }
 
-    public void insert() throws Exception {
+    public void insert() {
         importNewRecordService.update();
     }
 }

@@ -3,16 +3,17 @@ package cn.liwenye.schedule;
 import cn.liwenye.bean.ReadPomos;
 
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import cn.liwenye.bean.TechPomos;
 import cn.liwenye.cache.CacheSingleton;
 import cn.liwenye.dao.PomosMapper;
-import cn.liwenye.service.MailService;
 import cn.liwenye.service.SendMailService;
 
+/**
+ * @author liwenye
+ */
 public class TaskPomotodoMail extends QuartzJobBean {
 
 	@Autowired
@@ -21,9 +22,10 @@ public class TaskPomotodoMail extends QuartzJobBean {
 	@Autowired
 	private SendMailService sendMailService;
 
+	public static int HOW_MANY_POMOS_ALERT = 5;
+
     @Override
-    protected void executeInternal(JobExecutionContext context)
-            throws JobExecutionException {
+    protected void executeInternal(JobExecutionContext context) {
 		sendTechEmail();
 		sendReadEmail();
     }
@@ -32,13 +34,8 @@ public class TaskPomotodoMail extends QuartzJobBean {
     	TechPomos techPomos = pomosMapper.selectNumOfTechPomos();
     	int numOfTechPomos = techPomos.getNumOfTechPomos();
     	
-    	if (numOfTechPomos % 5 > 0) {
-    		return;
-    	}
-    	
-    	
-    	CacheSingleton.getCacheSingleton();
-    	if(CacheSingleton.getNumOfTechPomosSent() == numOfTechPomos) {
+    	if (numOfTechPomos % HOW_MANY_POMOS_ALERT > 0
+                || CacheSingleton.getNumOfTechPomosSent() == numOfTechPomos) {
     		return;
     	} else {
     		CacheSingleton.setNumOfTechPomosSent(numOfTechPomos);
@@ -53,13 +50,8 @@ public class TaskPomotodoMail extends QuartzJobBean {
 		ReadPomos readPomos = pomosMapper.selectNumOfReadPomos();
 		int numOfReadPomos = readPomos.getNumOfReadPomos();
 
-		if (numOfReadPomos % 5 > 0) {
-			return;
-		}
-
-
-		CacheSingleton.getCacheSingleton();
-		if(CacheSingleton.getNumOfReadPomosSent() == numOfReadPomos) {
+		if (numOfReadPomos % HOW_MANY_POMOS_ALERT > 0
+                || CacheSingleton.getNumOfReadPomosSent() == numOfReadPomos) {
 			return;
 		} else {
 			CacheSingleton.setNumOfReadPomosSent(numOfReadPomos);

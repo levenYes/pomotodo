@@ -2,6 +2,9 @@ package cn.liwenye.service;
 
 import cn.liwenye.bean.LastRecord;
 import cn.liwenye.dao.PomosMapper;
+import cn.liwenye.schedule.TaskImportNewRecord;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,15 +26,16 @@ public class ImportNewRecordService {
     
     @Value("${spring.parameter.baseUrl}")
     String baseUrl;
+
+    private Log logger = LogFactory.getLog(TaskImportNewRecord.class);
     
     private static final String INIT_DATE = "2016/08/31";
 
     public void update(){
         String url;
-        LastRecord lastRecord = pomosMapper.selectLastRecord();
         Date dayOfLastRecord;
+        LastRecord lastRecord = pomosMapper.selectLastRecord();
         SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
-        //考虑到历史记录为空的情况
         if(lastRecord != null) {
             dayOfLastRecord = lastRecord.getDateOfLastRecord();
         } else {
@@ -39,7 +43,7 @@ public class ImportNewRecordService {
                 dayOfLastRecord = sf.parse(INIT_DATE);
             } catch (ParseException e) {
                 dayOfLastRecord = new Date();
-                e.printStackTrace();
+                logger.error("设置最后一天日期发生异常", e);
             }
         }
         String lastDay = sf.format(dayOfLastRecord);
