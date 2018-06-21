@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONArray;
 
@@ -11,6 +12,7 @@ import cn.liwenye.bean.Pomos;
 import cn.liwenye.dao.PomosMapper;
 import cn.liwenye.util.DateUtil;
 
+@Service
 public class DaoService {
 	@Autowired
     PomosMapper pomosMapper;

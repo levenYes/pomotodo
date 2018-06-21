@@ -23,6 +23,5 @@ public class BaseTest {
     
     @Test
     public void updateTest() {
-    	importNewRecordService.update();
     }
 }
