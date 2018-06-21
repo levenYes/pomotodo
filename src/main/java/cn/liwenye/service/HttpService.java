@@ -21,10 +21,8 @@ import java.util.Map;
  */
 @Service
 public class HttpService {
-    @Autowired
-    PomosMapper pomosMapper;
 
-    public  String sendGet(String url) {
+    public  String sendGet(String url, String token) {
         String result = "";
         BufferedReader in = null;
         try {
@@ -33,7 +31,7 @@ public class HttpService {
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
             // 设置通用的请求属性
-            connection.setRequestProperty("Authorization", "token pR5QfI9tstmP5CND8vAbSkTN8jBgMHUwlGv7R0rI8Bo3XZRLbGW4NCSkGPAqjfK5etJ9vyvSFkPN4XkGwYJP77daSRqtWKu6");
+            connection.setRequestProperty("Authorization", "token "+ token);
             // 建立实际的连接
             connection.connect();
             // 获取所有响应头字段
@@ -66,67 +64,4 @@ public class HttpService {
         return result;
     }
 
-    public void importData(String data){
-    	List<Pomos> pomosList = JSONArray.parseArray(data, Pomos.class);
-        for (Pomos pomos : pomosList) {
-            //created_at
-            String strCreatedAt = pomos.getCreated_at();
-            Date dateCreatedAt = DateUtil.convertDate(strCreatedAt);
-            pomos.setCreatedAt(dateCreatedAt);
-            //updated_at
-            String strUpdatedAt = pomos.getUpdated_at();
-            Date dateUpdatedAt = DateUtil.convertDate(strUpdatedAt);
-            pomos.setUpdatedAt(dateUpdatedAt);
-            //started_at
-            String strStartedAt = pomos.getStarted_at();
-            Date dateStartedAt = DateUtil.convertDate(strStartedAt);
-            pomos.setStartedAt(dateStartedAt);
-            //ended_at
-            String strEndedAt = pomos.getEnded_at();
-            Date dateEndedAt = DateUtil.convertDate(strEndedAt);
-            pomos.setEndedAt(dateEndedAt);
-            //local_started_at
-            String strLocalStartedAt = pomos.getLocal_started_at();
-            Date dateLocalStartedAt = DateUtil.convertDate(strLocalStartedAt);
-            pomos.setLocalStartedAt(dateLocalStartedAt);
-            //local_ended_at
-            String strLocalEndedAt = pomos.getLocal_ended_at();
-            Date dateLocalEndedAt = DateUtil.convertDate(strLocalEndedAt);
-            pomos.setLocalEndedAt(dateLocalEndedAt);
-            //insert
-            pomosMapper.insert(pomos);
-        }
-    }
-
-    public void importDataByBatch(String data){
-    	List<Pomos> pomosList = JSONArray.parseArray(data, Pomos.class);
-    	 for (Pomos pomos : pomosList) {
-            //created_at
-            String strCreatedAt = pomos.getCreated_at();
-            Date dateCreatedAt = DateUtil.convertDate(strCreatedAt);
-            pomos.setCreatedAt(dateCreatedAt);
-            //updated_at
-            String strUpdatedAt = pomos.getUpdated_at();
-            Date dateUpdatedAt = DateUtil.convertDate(strUpdatedAt);
-            pomos.setUpdatedAt(dateUpdatedAt);
-            //started_at
-            String strStartedAt = pomos.getStarted_at();
-            Date dateStartedAt = DateUtil.convertDate(strStartedAt);
-            pomos.setStartedAt(dateStartedAt);
-            //ended_at
-            String strEndedAt = pomos.getEnded_at();
-            Date dateEndedAt = DateUtil.convertDate(strEndedAt);
-            pomos.setEndedAt(dateEndedAt);
-            //local_started_at
-            String strLocalStartedAt = pomos.getLocal_started_at();
-            Date dateLocalStartedAt = DateUtil.convertDate(strLocalStartedAt);
-            pomos.setLocalStartedAt(dateLocalStartedAt);
-            //local_ended_at
-            String strLocalEndedAt = pomos.getLocal_ended_at();
-            Date dateLocalEndedAt = DateUtil.convertDate(strLocalEndedAt);
-            pomos.setLocalEndedAt(dateLocalEndedAt);
-        }
-        pomosMapper.insertByBatch(pomosList);
-        pomosMapper.deleteDuplicatedRecord();
-    }
 }

@@ -16,12 +16,18 @@ import java.util.Date;
 public class ImportHistoryService {
     @Autowired
     HttpService httpService;
+    
+    @Autowired
+    DaoService daoService;
 
     @Autowired
     PomosMapper pomosMapper;
 
     @Value("${spring.parameter.baseUrl}")
     String baseUrl;
+    
+    @Value("${spring.parameter.token}")
+    String token;
 
     public void importHistory(){
         String url;
@@ -29,8 +35,8 @@ public class ImportHistoryService {
         boolean ifContinue = true;
         while(ifContinue){
             url = baseUrl + laterThanDate;
-            String data = httpService.sendGet(url);
-            httpService.importDataByBatch(data);
+            String data = httpService.sendGet(url,token);
+            daoService.importDataByBatch(data);
             LastRecord lastRecord = pomosMapper.selectLastRecord();
             Date dayOfLastRecord = lastRecord.getDateOfLastRecord();
             SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
@@ -40,9 +46,5 @@ public class ImportHistoryService {
             }
             laterThanDate = lastDay;
         }
-    }
-
-    public void clearHistory(){
-        pomosMapper.deleteAll();
     }
 }
