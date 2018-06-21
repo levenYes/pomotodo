@@ -8,8 +8,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 /**
- * @author liwenye
- * Created on 20180102
+ * @author LIWENYE
+ *
+ * @date 20180632
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = PomotodoServerApplication.class)
@@ -17,13 +18,11 @@ public class BaseTest {
     @Autowired
     private MailService mailService;
     
+    @Autowired
+    private ImportNewRecordService importNewRecordService;
+    
     @Test
-    public void mailTest() {
-    	//发送邮件
-    	String to = "levenyes@icloud.com";
-        String title = "testing";
-        String content = "test ok!";
-        mailService.sendSimpleMail(to, title, content);
+    public void updateTest() {
+    	importNewRecordService.update();
     }
-
 }
