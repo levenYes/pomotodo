@@ -39,7 +39,6 @@ public class ImportNewRecordService {
     private static final String INIT_DATE = "2016/08/31";
 
     public void update(){
-        String url;
         Date dayOfLastRecord;
         LastRecord lastRecord = pomosMapper.selectLastRecord();
         SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
@@ -54,7 +53,7 @@ public class ImportNewRecordService {
             }
         }
         String lastDay = sf.format(dayOfLastRecord);
-        url = baseUrl + lastDay;
+        String url = baseUrl + lastDay;
         String data = httpService.sendGet(url,token);
         daoService.importData(data);
     }

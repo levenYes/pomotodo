@@ -1,23 +1,16 @@
 package cn.liwenye.service;
 
-import cn.liwenye.bean.Pomos;
-import cn.liwenye.dao.PomosMapper;
-import cn.liwenye.util.DateUtil;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSONArray;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 /**
- * @author liwenye on 2018/01/02
+ * @author LIWENYE on 2018/01/02
  */
 @Service
 public class HttpService {

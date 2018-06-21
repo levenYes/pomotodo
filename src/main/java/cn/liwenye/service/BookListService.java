@@ -48,8 +48,8 @@ public class BookListService {
                 continue;
             }
             String contentRow = bookName
-                    + "       最近阅读: " + lastDate
-                    + "       累计用时: " + totalHours + "h";
+                    + "       最后一次阅读: " + lastDate
+                    + "       历史累计用时: " + totalHours + "h";
             mdContent.add(contentRow);
         }
         File mdFile = new File(pathname);

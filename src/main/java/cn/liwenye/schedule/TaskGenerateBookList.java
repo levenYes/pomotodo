@@ -4,13 +4,12 @@ import cn.liwenye.service.BookListService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Liwenye
+ * @author LIWENYE
  * @date 2018/01/10
  * 生成阅读记录定时任务类
  */
