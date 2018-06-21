@@ -7,15 +7,11 @@ import cn.liwenye.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -100,7 +96,6 @@ public class HttpService {
             //insert
             pomosMapper.insert(pomos);
         }
-        pomosMapper.deleteDuplicatedRecord();
     }
 
     public void importDataByBatch(String data){

@@ -111,7 +111,7 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.liwenye.bean.Pomos">
-    insert ignore into pomos (uuid, created_at, updated_at, 
+    insert  into pomos (uuid, created_at, updated_at, 
       description, started_at, ended_at, 
       local_started_at, local_ended_at, length, 
       abandoned, manual)
@@ -119,10 +119,8 @@
       #{description,jdbcType=VARCHAR}, #{startedAt,jdbcType=TIMESTAMP}, #{endedAt,jdbcType=TIMESTAMP}, 
       #{localStartedAt,jdbcType=TIMESTAMP}, #{localEndedAt,jdbcType=TIMESTAMP}, #{length,jdbcType=INTEGER}, 
       #{abandoned,jdbcType=BIT}, #{manual,jdbcType=BIT}
-      <!--
       from pomos a where not exists
-        (select null from pomos b where b.uuid = #{uuid,jdbcType=VARCHAR})
-        -->
+        (select * from pomos b where b.uuid = #{uuid,jdbcType=VARCHAR})
   </insert>
   <!-- 批量插入 -->
   <insert id="insertByBatch" parameterType="java.util.List">
