@@ -1,17 +1,16 @@
 package cn.liwenye.schedule;
 
-import cn.liwenye.service.ImportNewRecordService;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
+import cn.liwenye.service.ImportNewRecordService;
+
 /**
- * @author Liwenye
+ * @author LIWENYE
  * @date 2018/01/09
  * 插入新数据定时任务类
  */
@@ -25,13 +24,13 @@ public class TaskImportNewRecord extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext context) {
         try {
-            insert();
+            update();
         } catch (Exception e) {
         	logger.error("执行插入新数据定时任务方法发生异常", e);
         }
     }
 
-    public void insert() {
+    public void update() {
         importNewRecordService.update();
     }
 }

@@ -3,6 +3,7 @@ package cn.liwenye.service;
 import cn.liwenye.bean.LastRecord;
 import cn.liwenye.dao.PomosMapper;
 import cn.liwenye.schedule.TaskImportNewRecord;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +15,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author liwenye on 2018/01/09
+ * @author LIWENYE on 2018/01/09
  */
 @Service
 public class ImportNewRecordService {
     @Autowired
     HttpService httpService;
+    
+    @Autowired
+    DaoService daoService;
 
     @Autowired
     PomosMapper pomosMapper;
     
     @Value("${spring.parameter.baseUrl}")
     String baseUrl;
+    
+    @Value("${spring.parameter.token}")
+    String token;
 
     private Log logger = LogFactory.getLog(TaskImportNewRecord.class);
     
     private static final String INIT_DATE = "2016/08/31";
 
     public void update(){
-        String url;
         Date dayOfLastRecord;
         LastRecord lastRecord = pomosMapper.selectLastRecord();
         SimpleDateFormat sf = new SimpleDateFormat("yyyy/MM/dd");
@@ -47,8 +53,8 @@ public class ImportNewRecordService {
             }
         }
         String lastDay = sf.format(dayOfLastRecord);
-        url = baseUrl + lastDay;
-        String data = httpService.sendGet(url);
-        httpService.importData(data);
+        String url = baseUrl + lastDay;
+        String data = httpService.sendGet(url,token);
+        daoService.importData(data);
     }
 }

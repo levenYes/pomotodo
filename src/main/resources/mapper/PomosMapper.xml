@@ -119,10 +119,6 @@
       #{description,jdbcType=VARCHAR}, #{startedAt,jdbcType=TIMESTAMP}, #{endedAt,jdbcType=TIMESTAMP}, 
       #{localStartedAt,jdbcType=TIMESTAMP}, #{localEndedAt,jdbcType=TIMESTAMP}, #{length,jdbcType=INTEGER}, 
       #{abandoned,jdbcType=BIT}, #{manual,jdbcType=BIT}
-      <!--
-      from pomos a where not exists
-        (select null from pomos b where b.uuid = #{uuid,jdbcType=VARCHAR})
-        -->
   </insert>
   <!-- 批量插入 -->
   <insert id="insertByBatch" parameterType="java.util.List">
