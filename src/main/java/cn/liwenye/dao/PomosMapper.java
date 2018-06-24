@@ -22,7 +22,7 @@ public interface PomosMapper {
 
     int updateByExample(@Param("record") Pomos record, @Param("example") PomosExample example);
 
-    List<Booklist> selectBooklist();
+    List<BookList> selectBooklist();
 
     void deleteDuplicatedRecord();
 

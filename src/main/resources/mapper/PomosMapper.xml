@@ -14,7 +14,7 @@
     <result column="abandoned" jdbcType="BIT" property="abandoned" />
     <result column="manual" jdbcType="BIT" property="manual" />
   </resultMap>
-  <resultMap id="BooklistResultMap" type="cn.liwenye.bean.Booklist">
+  <resultMap id="BooklistResultMap" type="cn.liwenye.bean.BookList">
     <result column="description" jdbcType="VARCHAR" property="book" />
     <result column="local_ended_at" jdbcType="TIMESTAMP" property="lastDay" />
     <result column="total_pomos" jdbcType="INTEGER" property="totalPomos"/>

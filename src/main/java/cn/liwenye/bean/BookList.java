@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * @author liwenye on 2018/01/08
  */
-public class Booklist {
+public class BookList {
     String book;
 
     Date lastDay;

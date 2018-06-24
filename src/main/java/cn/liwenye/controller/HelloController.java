@@ -13,12 +13,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 public class HelloController {
-    @Autowired
-    ImportHistoryService importHistoryService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/hello")
     public String hello() {
-        importHistoryService.importHistory();
+
         return "hello world!";
     }
 }

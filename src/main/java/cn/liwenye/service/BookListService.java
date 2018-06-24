@@ -1,6 +1,6 @@
 package cn.liwenye.service;
 
-import cn.liwenye.bean.Booklist;
+import cn.liwenye.bean.BookList;
 import cn.liwenye.dao.PomosMapper;
 import cn.liwenye.util.StrUtil;
 import cn.liwenye.util.TxtUtil;
@@ -27,11 +27,11 @@ public class BookListService {
     private static final double HOUR_PER_POMOTODO = 0.5;
 
     public void genBookList(String pathname){
-        List<Booklist> bookList = pomosMapper.selectBooklist();
+        List<BookList> bookList = pomosMapper.selectBooklist();
         String subTitle = "";
         List<String> mdContent = new ArrayList<String>(16);
         TxtUtil.initMdContent(mdContent);
-        for(Booklist bookRecord : bookList){
+        for(BookList bookRecord : bookList){
             String book = bookRecord.getBook();
             Date date = bookRecord.getLastDay();
             int totalPomos = bookRecord.getTotalPomos();
