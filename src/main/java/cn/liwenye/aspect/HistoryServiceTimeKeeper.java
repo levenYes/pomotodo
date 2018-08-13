@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * @author liwenye
+ * @author LIWENYE
  */
 @Aspect
 @Component
@@ -19,7 +19,6 @@ public class HistoryServiceTimeKeeper {
 
     @Pointcut("execution(* cn.liwenye.controller.HelloController.hello(..))")
     public void method() {
-
     }
 
     @Before("method()")
