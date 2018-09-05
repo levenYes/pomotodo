@@ -11,9 +11,10 @@ import java.util.Date;
 public class DateUtil {
     public static Date convertDate(String strDate){
         try {
-            strDate = strDate.substring(0,22);
+            strDate = strDate.substring(0,19);
             strDate = strDate.replace("T"," ");
-            Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS").parse(strDate);
+            //为什么这个地方的HH要大写，不能用hh？
+            Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(strDate);
             return date;
         } catch (ParseException e) {
             e.printStackTrace();

@@ -33,9 +33,9 @@ public class StringUtilTest {
     
     @Test
     public void testConvertDate() {
-    	String date = "2018-09-05T00:16:58.000Z";
-    	Date strDate = DateUtil.convertDate(date);
-    	assertEquals( "2018-09-05 00:16:58",strDate.toString());  
+    	String date = "2018-09-05T12:02:47.000Z";
+     	Date strDate = DateUtil.convertDate(date);
+    	assertEquals( "Wed Sep 05 12:02:47 CST 2018",strDate.toString());  
     }
-
+    
 }
