@@ -294,12 +294,12 @@
   	select  count(distinct uuid)+70 as num_of_tech_pomos 
   	from pomos 
 	where local_ended_at > '20180302'
-	and description like '%技术%'
+	and description like '%#技术%'
   </select>
 
   <select id="selectNumOfReadPomos" resultMap="ReadPomosResultMap" >
     select  count(distinct uuid)-70 as num_of_read_pomos
     from pomos
-    where description like '%阅读%'
+    where description like '%#阅读%'
   </select>
 </mapper>
