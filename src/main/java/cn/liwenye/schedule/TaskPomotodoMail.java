@@ -23,6 +23,10 @@ public class TaskPomotodoMail extends QuartzJobBean {
 	private SendMailService sendMailService;
 
 	public static int HOW_MANY_POMOS_ALERT = 5;
+	
+	public static int TECH_BEGIN_TOALERT = 500;
+	
+	public static int READ_BEGIN_TOALERT = 1700;
 
     @Override
     protected void executeInternal(JobExecutionContext context) {
@@ -35,7 +39,8 @@ public class TaskPomotodoMail extends QuartzJobBean {
     	int numOfTechPomos = techPomos.getNumOfTechPomos();
     	
     	if (numOfTechPomos % HOW_MANY_POMOS_ALERT > 0
-                || CacheSingleton.getNumOfTechPomosSent() == numOfTechPomos) {
+                || CacheSingleton.getNumOfTechPomosSent() == numOfTechPomos
+                || numOfTechPomos < TECH_BEGIN_TOALERT) {
     		return;
     	} else {
     		CacheSingleton.setNumOfTechPomosSent(numOfTechPomos);
@@ -51,7 +56,8 @@ public class TaskPomotodoMail extends QuartzJobBean {
 		int numOfReadPomos = readPomos.getNumOfReadPomos();
 
 		if (numOfReadPomos % HOW_MANY_POMOS_ALERT > 0
-                || CacheSingleton.getNumOfReadPomosSent() == numOfReadPomos) {
+                || CacheSingleton.getNumOfReadPomosSent() == numOfReadPomos
+                || numOfReadPomos < READ_BEGIN_TOALERT) {
 			return;
 		} else {
 			CacheSingleton.setNumOfReadPomosSent(numOfReadPomos);
