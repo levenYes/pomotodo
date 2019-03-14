@@ -56,7 +56,7 @@ public class BookListService {
              }
              String contentRow = bookName
                      + "       最后一次阅读: " + lastDate
-                     + "       历史累计用时: " + totalHours + "h";
+                     + "       历史累计用时: " + totalHours + "小时";
              mdContent.add(contentRow);
          }
          return mdContent;
