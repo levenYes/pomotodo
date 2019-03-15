@@ -63,7 +63,7 @@ public class TaskPomotodoMail extends QuartzJobBean {
 			CacheSingleton.setNumOfReadPomosSent(numOfReadPomos);
 		}
 
-		String pomotodoName = "阅读";
+		String pomotodoName = "总阅读";
 		int numOfPomotodo = numOfReadPomos;
 		sendMailService.sendEmail(pomotodoName, numOfPomotodo);
 	}
