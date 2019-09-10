@@ -34,8 +34,8 @@
 				<property name="beanName" value="taskInsertNewRecord"/>
 			</bean>
 		</property>
-		<!-- 触发规则 （每45秒跑一次）-->
-		<property name="cronExpression" value="0/45 * * * * ? *" />
+		<!-- 触发规则 （每4秒跑一次）-->
+		<property name="cronExpression" value="0/4 * * * * ? *" />
 		<property name="group" value="pomotodo" />
 	</bean>
 
@@ -47,8 +47,8 @@
 				<property name="beanName" value="taskGenerateBookList"/>
 			</bean>
 		</property>
-		<!-- 触发规则 （每55秒跑一次）-->
-		<property name="cronExpression" value="0/55 * * * * ? *" />
+		<!-- 触发规则 （每5秒跑一次）-->
+		<property name="cronExpression" value="0/5 * * * * ? *" />
 		<property name="group" value="pomotodo" />
 	</bean>
 	
@@ -60,8 +60,8 @@
 				<property name="beanName" value="taskPomotodoMail"/>
 			</bean>
 		</property>
-		<!-- 触发规则 （每55秒跑一次）-->
-		<property name="cronExpression" value="0/55 * * * * ? *" />
+		<!-- 触发规则 （每5秒跑一次）-->
+		<property name="cronExpression" value="0/5 * * * * ? *" />
 		<property name="group" value="pomotodo" />
 	</bean>
 		<!--
