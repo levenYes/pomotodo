@@ -22,11 +22,11 @@ public class TaskPomotodoMail extends QuartzJobBean {
 	@Autowired
 	private SendMailService sendMailService;
 
-	public static int HOW_MANY_POMOS_ALERT = 20;
+	public static int HOW_MANY_POMOS_ALERT = 100;
 	
 	public static int TECH_BEGIN_TOALERT = 800;
 	
-	public static int READ_BEGIN_TOALERT = 5200;
+	public static int READ_BEGIN_TOALERT = 7000;
 
     @Override
     protected void executeInternal(JobExecutionContext context) {
