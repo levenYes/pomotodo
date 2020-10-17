@@ -12,8 +12,9 @@ public class SendMailService {
 	
 	public void sendEmail(String pomotodoName, int numOfPomotodo) {
 		String to = "levenyes@icloud.com";
-		String title = pomotodoName + "番茄数积累提醒！！！";
-		String statement = pomotodoName + "番茄数到达" + numOfPomotodo + "！";
+		String title = pomotodoName + "小时数积累提醒！！！";
+		int hours = numOfPomotodo / 2;
+		String statement = pomotodoName + "小时数到达" + hours + "！";
 		StringBuilder content = new StringBuilder();
 		for (int i=0; i < repeatTimes; i++) {
 			content.append(statement).append("\n");
