@@ -95,7 +95,7 @@ public class TxtUtil {
 		mdContent.add("---");
 		mdContent.add("title: 阅读清单");
 
-		String date = DateUtil.getThreeDayBefore();
+		String date = DateUtil.getSomeDayBefore(0);
 		mdContent.add("date: "+date);
 
 		mdContent.add("categories: 定时任务生成");

@@ -22,10 +22,10 @@ public class DateUtil {
         return null;
     }
 
-    public static String getThreeDayBefore() {
+    public static String getSomeDayBefore(int howManyDays) {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        calendar.add(Calendar.DATE, -3);
+        calendar.add(Calendar.DATE, -howManyDays);
         String threeDaysAgo = sdf.format(calendar.getTime());
         return threeDaysAgo;
     }
